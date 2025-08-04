@@ -1,0 +1,78 @@
+/* Tema personalizado con colores corporativos */
+
+/* Barra de navegación superior (navbar) */
+.theme-corporativo .navbar {
+  background-color: #E22227; /* Rojo corporativo principal */
+}
+
+/* Marca del sitio (logo, texto) en navbar */
+.theme-corporativo .navbar-brand {
+  color: #fff; /* Blanco para contraste */
+}
+.theme-corporativo .navbar-brand:hover {
+  color: #fff;
+}
+.theme-corporativo .navbar-brand:active {
+  color: #fff;
+}
+.theme-corporativo .navbar-brand:focus {
+  color: #fff;
+}
+
+/* Enlaces en el navbar */
+.theme-corporativo .nav > li > a {
+  color: #fff; /* Blanco para enlaces */
+}
+.theme-corporativo .nav > li > a:hover {
+  background-color: rgba(0, 0, 0, 0); /* Fondo transparente al pasar el mouse */
+}
+.theme-corporativo .nav > li > a:focus {
+  background-color: rgba(0, 0, 0, 0); /* Fondo transparente al enfocar */
+}
+
+/* Dropdowns abiertos en el navbar */
+.theme-corporativo .nav .open > a {
+  background-color: rgba(0, 0, 0, 0);
+}
+.theme-corporativo .nav .open > a:hover {
+  background-color: rgba(0, 0, 0, 0);
+}
+.theme-corporativo .nav .open > a:focus {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Icono de menú hamburguesa */
+.theme-corporativo .bars {
+  color: #fff;
+}
+
+/* Elemento activo en el menú lateral (sidebar) */
+.theme-corporativo .sidebar .menu .list li.active {
+  background-color: #440101; /* Vino profundo */
+}
+
+/* Ícono y texto del ítem activo */
+.theme-corporativo .sidebar .menu .list li.active > :first-child i,
+.theme-corporativo .sidebar .menu .list li.active > :first-child span {
+  color: #E22227; /* Rojo principal */
+}
+
+/* Submenús activos */
+.theme-corporativo .sidebar .menu .list .toggled {
+  background-color: #6C0102; /* Rojo vino intenso */
+}
+
+/* Fondo de submenús */
+.theme-corporativo .sidebar .menu .list .ml-menu {
+  background-color: #222B31; /* Gris oscuro */
+}
+
+/* Pie legal del sidebar */
+.theme-corporativo .sidebar .legal {
+  background-color: #55666E; /* Gris medio */
+}
+
+/* Enlaces en el pie legal */
+.theme-corporativo .sidebar .legal .copyright a {
+  color: #E22227 !important; /* Rojo principal para contraste */
+}

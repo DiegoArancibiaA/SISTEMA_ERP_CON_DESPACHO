@@ -1,0 +1,166 @@
+/* ====================== BARRA DE NAVEGACIÓN PRINCIPAL ====================== */
+.navbar {
+  font-family: $navbar-font-family; // Usa la variable de familia tipográfica
+  @include border-radius(0
+  ); // Elimina bordes redondeados
+  @include box-shadow(0 1px 5px rgba(0, 0, 0, .3)); // Sombra sutil
+  border: none; // Sin bordes
+  position: fixed; // Posición fija en la pantalla
+  top: 0; // Pegado al borde superior
+  left: 0; // Pegado al borde izquierdo
+  z-index: 12; // Nivel de apilamiento alto
+  width: 100%; // Ancho completo
+
+  /* Estilos para la marca/logo de la navbar */
+  .navbar-brand {
+    @include three-dots-overflow(); // Mixin para texto con puntos suspensivos si es muy largo
+  }
+
+  /* Menú personalizado alineado a la derecha */
+  .navbar-custom-right-menu {
+    float: right; // Flotado a la derecha
+  }
+
+  /* Botón de toggle para menú móvil */
+  .navbar-toggle {
+    text-decoration: none; // Sin subrayado
+    color: #fff; // Color blanco
+    width: 20px; // Dimensiones fijas
+    height: 20px;
+    margin-top: -4px; // Ajuste fino de posición vertical
+    margin-right: 17px; // Margen derecho
+
+    /* Icono del botón toggle (usando Material Icons) */
+    &:before {
+      content: '\E8D5'; // Código del icono
+      font-family: 'Material Icons'; // Familia de iconos
+      font-size: 26px; // Tamaño del icono
+    }
+  }
+
+  /* Menú colapsable */
+  .navbar-collapse {
+    &.in { // Cuando está expandido
+      overflow: visible; // Permite que el contenido sea visible
+    }
+  }
+}
+
+/* ====================== ESTADO "LS-CLOSED" (SIDEBAR CERRADO) ====================== */
+.ls-closed {
+  /* Efecto para ocultar la sidebar */
+  .sidebar {
+    margin-left: -300px; // Mueve la sidebar fuera de la pantalla
+  }
+
+  /* Ajuste del contenido principal */
+  section.content {
+    margin-left: 15px; // Margen reducido al cerrar sidebar
+  }
+
+  /* Estilos para los iconos de menú (bars) */
+  .bars {
+    /* Estados base para los pseudo-elementos */
+    &:after,
+    &:before {
+      font-family: 'Material Icons'; // Usa iconos de Material
+      font-size: 24px; // Tamaño del icono
+      position: absolute; // Posicionamiento absoluto
+      top: 18px; // Posición desde arriba
+      left: 20px; // Posición desde la izquierda
+      margin-right: 10px; // Margen derecho
+      @include transform(scale(0)); // Inicialmente escalado a 0 (invisible)
+      @include transition(all .3s); // Transición suave de 0.3s
+    }
+
+    /* Icono de menú (hamburguesa) - visible por defecto */
+    &:before {
+      content: '\E5D2'; // Código del icono de menú
+      @include transform(scale(1)); // Escalado a tamaño normal
+    }
+
+    /* Icono de cerrar - oculto por defecto */
+    &:after {
+      content: '\E5C4'; // Código del icono de cerrar
+      @include transform(scale(0)); // Invisible inicialmente
+    }
+  }
+
+  /* Ajuste de posición para la marca cuando la sidebar está cerrada */
+  .navbar-brand {
+    margin-left: 30px; // Margen izquierdo aumentado
+  }
+}
+
+/* ====================== ESTADO "OVERLAY-OPEN" (OVERLAY ABIERTO) ====================== */
+.overlay-open {
+  .bars {
+    /* Invierte la visibilidad de los iconos */
+    &:before {
+      @include transform(scale(0)); // Oculta el icono de menú
+    }
+    &:after {
+      @include transform(scale(1)); // Muestra el icono de cerrar
+    }
+  }
+}
+
+/* ====================== ENCABEZADO DE LA BARRA DE NAVEGACIÓN ====================== */
+.navbar-header {
+  padding: 10px 7px; // Espaciado interno
+
+  /* Estilos para los iconos de barras */
+  .bars {
+    float: left; // Alineación a la izquierda
+    text-decoration: none; // Sin subrayado
+  }
+
+  /* Ajuste para imágenes en el encabezado */
+  img {
+    margin-top: -10px; // Margen superior negativo para alineación
+  }
+}
+
+/* ====================== ELEMENTOS DE NAVEGACIÓN ====================== */
+.navbar-nav {
+  /* Estilos para los enlaces principales */
+  >li {
+    >a {
+      padding: 7px 7px 2px 7px; // Espaciado interno
+      margin-top: 17px; // Margen superior
+      margin-left: 5px; // Margen izquierdo
+    }
+  }
+
+  /* Menús desplegables */
+  .dropdown-menu {
+    margin-top: -40px !important; // Ajuste de posición
+  }
+}
+
+/* ====================== ETIQUETAS DE CONTADOR (NOTIFICACIONES) ====================== */
+.label-count {
+  position: absolute; // Posicionamiento absoluto
+  top: 2px; // Posición desde arriba
+  right: 6px; // Posición desde la derecha
+  font-size: 10px; // Tamaño pequeño
+  line-height: 15px; // Altura de línea
+  background-color: #000; // Fondo negro
+  padding: 0 4px; // Espaciado mínimo
+  @include border-radius(3px); // Bordes ligeramente redondeados
+}
+
+/* ====================== GENERACIÓN AUTOMÁTICA DE VARIANTES DE COLOR ====================== */
+@each $key, $val in $colors {
+  /* Crea una clase .col-[color] para cada color en el mapa $colors */
+  .col-#{$key} {
+    .navbar {
+      /* Aplica mixin para estilos de enlaces con colores específicos */
+      @include navbar-link-color(#fff, #000, .95);
+      
+      /* Versión alternativa comentada:
+      @include navbar-link-color(rgba(0,0,0,0.85), #000, .95); 
+      */
+    }
+  }
+}

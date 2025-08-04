@@ -1,0 +1,169 @@
+﻿// **Archivo: scss/_leftsidebaroverlay.scss**
+// Estilos para el sidebar moderno
+
+.left-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  background: $sidebar-bg;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  .sidebar-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      color: $sidebar-text-active;
+      font-size: 18px;
+      font-weight: $font-weight-semibold;
+      text-decoration: none;
+      
+      .logo-icon {
+        width: 32px;
+        height: 32px;
+        background: $primary-color;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        color: white;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .user-profile {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .profile-info {
+      display: flex;
+      align-items: center;
+      
+      .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: $primary-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: $font-weight-semibold;
+        margin-right: 12px;
+      }
+      
+      .profile-details {
+        .profile-name {
+          color: $sidebar-text-active;
+          font-size: 14px;
+          font-weight: $font-weight-medium;
+          margin-bottom: 2px;
+        }
+        
+        .profile-role {
+          color: $sidebar-text;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .sidebar-menu {
+    padding: 20px 0;
+    
+    .menu-section {
+      margin-bottom: 32px;
+      
+      .section-title {
+        color: $sidebar-text;
+        font-size: 11px;
+        font-weight: $font-weight-semibold;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0 24px;
+        margin-bottom: 12px;
+      }
+      
+      .menu-item {
+        display: block;
+        padding: 12px 24px;
+        color: $sidebar-text;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: $font-weight-medium;
+        transition: all 0.2s ease;
+        position: relative;
+        
+        &:hover {
+          background: $sidebar-hover-bg;
+          color: $sidebar-text-active;
+        }
+        
+        &.active {
+          background: $sidebar-active-bg;
+          color: $sidebar-text-active;
+          
+          &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: $primary-color;
+          }
+        }
+        
+        .menu-icon {
+          width: 20px;
+          height: 20px;
+          margin-right: 12px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          vertical-align: middle;
+        }
+        
+        .menu-badge {
+          float: right;
+          background: #f56565;
+          color: white;
+          font-size: 10px;
+          padding: 2px 6px;
+          border-radius: 10px;
+          font-weight: $font-weight-semibold;
+        }
+      }
+    }
+  }
+}
+
+// Ajustar el contenido principal
+.main-content {
+  margin-left: $sidebar-width;
+  min-height: 100vh;
+  background: $body-bg;
+  transition: margin-left 0.3s ease;
+}
