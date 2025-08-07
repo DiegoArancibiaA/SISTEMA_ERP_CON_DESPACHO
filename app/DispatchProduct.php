@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class DispatchProduct extends Model
 {
-    protected $table = 'dispatch_products';
     protected $fillable = ['dispatch_id', 'product_id', 'quantity_out', 'quantity_returned'];
-    
-    public function dispatch()
-    {
-        return $this->belongsTo('App\Dispatch');
-    }
-    
+
     public function product()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(\App\Product::class);
     }
-    
-    public function getMissingAttribute()
+
+    public function dispatch()
     {
-        return $this->quantity_out - $this->quantity_returned;
+        return $this->belongsTo(\App\Dispatch::class);
     }
+
 }

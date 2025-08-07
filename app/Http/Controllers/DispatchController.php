@@ -6,273 +6,125 @@ use Illuminate\Http\Request;
 use App\Dispatch;
 use App\DispatchProduct;
 use App\Product;
-use App\User;
-use Validator;
+use Carbon\Carbon;
 use DB;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\DispatchExport;
+
 
 class DispatchController extends Controller
 {
-    public function __construct()
-    {
-                
-        
-        $this->middleware('auth');
-
-    }
-    
-    public function index()
-    {
-        $dispatches = Dispatch::with('user')
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-                    
-        return view('dispatches.index', compact('dispatches'));
-    }
-    
+    // Mostrar la página con ambos formularios y tabla de faltantes
     public function create()
     {
-        $sellers = User::where('role_id', 2)
-                    ->orderBy('name')
-                    ->pluck('name', 'id');
-        
-        return view('dispatches.create', compact('sellers'))
-               ->withHeaders([
-                   'X-Content-Type-Options' => 'nosniff',
-                   'Referrer-Policy' => 'strict-origin-when-cross-origin'
-               ]);
+        // Opcional: podrías cargar productos para autocompletar en los formularios
+        return view('dispatches.create');
     }
-    
-    public function store(Request $request)
+
+    // Registrar salida de producto
+    public function storeOut(Request $request)
     {
-        $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id'
+        $request->validate([
+            'sku_out' => 'required|string|exists:products,sku',
+            'quantity_out' => 'required|integer|min:1',
         ]);
 
-        try {
-            DB::beginTransaction();
-            
+        $product = Product::where('sku', $request->sku_out)->firstOrFail();
+
+        DB::transaction(function () use ($product, $request) {
             $dispatch = Dispatch::create([
-                'user_id' => $validatedData['user_id'],
+                'user_id' => auth()->id() ?? 1,
                 'dispatch_date' => now(),
-                'status' => 'pending'
+                'status' => 'pending',
             ]);
-            
-            DB::commit();
-            
-            // AÑADE ESTO PARA DEPURACIÓN (temporal)
-            \Log::info('Despacho creado', ['id' => $dispatch->id]);
-            
-            // MODIFICA LA REDIRECCIÓN PARA ASEGURAR LA RUTA
-            return redirect()->route('dispatches.scan', ['dispatch' => $dispatch->id])
-                ->with('success', 'Despacho creado correctamente');
-                
-        } catch (\Exception $e) {
-            DB::rollBack();
-            \Log::error('Error al crear despacho', ['error' => $e->getMessage()]);
-            return back()->with('error', 'Error al crear despacho: '.$e->getMessage());
-        }
-    }
-    
-    public function scan($id)
-    {
-        $dispatch = Dispatch::with(['user', 'products.product'])
-                    ->findOrFail($id);
-        
-        return view('dispatches.scan', compact('dispatch'))
-               ->withHeaders([
-                   'Content-Security-Policy' => "default-src 'self'",
-                   'X-Frame-Options' => 'DENY'
-               ]);
-    }
-    
-    public function scanOut(Request $request, $dispatchId)
-    {
-        $request->headers->set('Accept', 'application/json');
-        $request->headers->set('X-Content-Type-Options', 'nosniff');
-        
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1'
-        ]);
 
-        if ($validator->fails()) {
-            return $this->jsonResponse([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            DB::beginTransaction();
-            
-            $product = Product::findOrFail($request->product_id);
-            
-            $dispatchProduct = DispatchProduct::firstOrNew([
-                'dispatch_id' => $dispatchId,
-                'product_id' => $request->product_id
+            DispatchProduct::create([
+                'dispatch_id' => $dispatch->id,
+                'product_id' => $product->id,
+                'quantity_out' => $request->quantity_out,
+                'quantity_returned' => 0,
             ]);
-            
-            $dispatchProduct->quantity_out += $request->quantity;
-            $dispatchProduct->save();
-            
-            DB::commit();
-            
-            return $this->jsonResponse([
-                'success' => true,
-                'product' => $product,
-                'quantity_out' => $dispatchProduct->quantity_out,
-                'products' => $this->getDispatchProducts($dispatchId)
-            ])->cookie('XSRF-TOKEN', csrf_token(), 0, null, null, true, true);
-            
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->jsonResponse([
-                'success' => false,
-                'message' => 'Error al registrar producto: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    public function scanReturn(Request $request, $dispatchId)
-    {
-        $request->headers->set('Accept', 'application/json');
-        $request->headers->set('X-XSS-Protection', '1; mode=block');
-        
-        $validator = Validator::make($request->all(), [
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:0'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->jsonResponse([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        try {
-            DB::beginTransaction();
-            
-            $dispatchProduct = DispatchProduct::where([
-                'dispatch_id' => $dispatchId,
-                'product_id' => $request->product_id
-            ])->firstOrFail();
-            
-            if (($dispatchProduct->quantity_returned + $request->quantity) > $dispatchProduct->quantity_out) {
-                throw new \Exception('No puede devolver más productos de los que salieron');
-            }
-            
-            $dispatchProduct->quantity_returned += $request->quantity;
-            $dispatchProduct->save();
-            
-            DB::commit();
-            
-            return $this->jsonResponse([
-                'success' => true,
-                'product' => $dispatchProduct->product,
-                'quantity_returned' => $dispatchProduct->quantity_returned,
-                'missing' => $dispatchProduct->missing,
-                'products' => $this->getDispatchProducts($dispatchId)
-            ])->header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-            
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->jsonResponse([
-                'success' => false,
-                'message' => 'Error al registrar producto devuelto: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    protected function getDispatchProducts($dispatchId)
-    {
-        return DispatchProduct::with('product')
-            ->where('dispatch_id', $dispatchId)
-            ->get()
-            ->map(function($item) {
-                return [
-                    'product' => [
-                        'product_name' => $item->product->product_name,
-                    ],
-                    'quantity_out' => $item->quantity_out,
-                    'quantity_returned' => $item->quantity_returned,
-                    'missing' => $item->missing
-                ];
-            });
-    }
-
-    public function complete(Request $request, $dispatchId)
-    {
-        $request->headers->set('Accept', 'application/json');
-        
-        try {
-            DB::beginTransaction();
-            
-            $dispatch = Dispatch::findOrFail($dispatchId);
-            $dispatch->status = 'completed';
-            $dispatch->completed_at = now();
-            $dispatch->save();
-            
-            DB::commit();
-            
-            return $this->jsonResponse([
-                'success' => true,
-                'message' => 'Despacho marcado como completado'
-            ])->header('Cache-Control', 'no-store');
-            
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return $this->jsonResponse([
-                'success' => false,
-                'message' => 'Error al completar despacho: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-
-    public function report($id)
-    {
-        $dispatch = Dispatch::with(['user', 'products.product'])
-                    ->findOrFail($id);
-        
-        return view('dispatches.report', compact('dispatch'))
-               ->withHeaders([
-                   'X-Content-Type-Options' => 'nosniff',
-                   'Referrer-Policy' => 'strict-origin-when-cross-origin'
-               ]);
-    }
-
-    public function export($id)
-    {
-        $dispatch = Dispatch::with(['user', 'products.product'])
-                    ->findOrFail($id);
-        
-        $products = $dispatch->products->map(function($item) {
-            return [
-                'Producto' => $item->product->product_name,
-                'Salida' => $item->quantity_out,
-                'Retorno' => $item->quantity_returned,
-                'Faltante' => $item->missing > 0 ? $item->missing : 0
-            ];
         });
-        
-        return Excel::download(new DispatchExport($products), "despacho_{$dispatch->id}.xlsx")
-               ->withHeaders([
-                   'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                   'Content-Disposition' => 'attachment; filename="despacho_'.$dispatch->id.'.xlsx"'
-               ]);
+
+        return back()->with('success_out', 'Salida registrada correctamente.');
     }
 
-    protected function jsonResponse($data, $status = 200, array $headers = [])
+
+    // Registrar retorno de producto
+    public function storeReturn(Request $request)
     {
-        $defaultHeaders = [
-            'Content-Type' => 'application/json',
-            'X-Content-Type-Options' => 'nosniff',
-            'X-Frame-Options' => 'DENY',
-            'X-XSS-Protection' => '1; mode=block'
-        ];
-        
-        return response()->json($data, $status, array_merge($defaultHeaders, $headers));
+        $request->validate([
+            'sku_return' => 'required|string|exists:products,sku',
+            'quantity_return' => 'required|integer|min:1',
+        ]);
+
+        $product = Product::where('sku', $request->sku_return)->firstOrFail();
+
+        // Buscar dispatch_products pendiente para ese producto para actualizar retorno
+        $dispatchProduct = DispatchProduct::whereHas('dispatch', function ($q) {
+            $q->where('status', 'pending');
+        })->where('product_id', $product->id)
+          ->whereRaw('quantity_returned < quantity_out')
+          ->first();
+
+        if (!$dispatchProduct) {
+            return back()->withErrors(['sku_return' => 'No existe salida pendiente para este producto o ya fue retornado completamente.']);
+        }
+
+        // Actualizar cantidad retornada, sin exceder la cantidad salida
+        $new_returned = $dispatchProduct->quantity_returned + $request->quantity_return;
+        if ($new_returned > $dispatchProduct->quantity_out) {
+            return back()->withErrors(['quantity_return' => 'La cantidad retornada no puede superar la cantidad salida.']);
+        }
+
+        $dispatchProduct->quantity_returned = $new_returned;
+        $dispatchProduct->save();
+
+        // Opcional: si se retorna toda la cantidad, se puede actualizar estado dispatch a completed
+        $allReturned = DispatchProduct::where('dispatch_id', $dispatchProduct->dispatch_id)
+            ->whereRaw('quantity_returned < quantity_out')
+            ->count();
+
+        if ($allReturned == 0) {
+            $dispatch = Dispatch::find($dispatchProduct->dispatch_id);
+            $dispatch->status = 'completed';
+            $dispatch->return_date = Carbon::now();
+            $dispatch->save();
+        }
+
+        return back()->with('success_return', 'Retorno de producto registrado correctamente.');
     }
+
+    // Mostrar productos faltantes: cantidad_out - cantidad_returned > 0
+    public function missingProducts()
+    {
+        // Solo mostrar productos cuyo retorno es menor a la salida
+        $missing = DispatchProduct::whereColumn('quantity_returned', '<', 'quantity_out')
+            ->with(['product', 'dispatch'])
+            ->get();
+
+        return view('dispatches.missing', compact('missing'));
+    }
+
+    public function history()
+    {
+        $dispatches = Dispatch::with('products')
+            ->whereNotNull('return_date')
+            ->orderBy('dispatch_date', 'desc')
+            ->get();
+
+        return view('dispatches.history', compact('dispatches'));
+    }
+
+
+
+    public function details($id)
+    {
+        $dispatch = Dispatch::with(['products.product'])->findOrFail($id);
+
+        return view('dispatches.details', compact('dispatch'));
+    }
+
+
+
+
+
 }

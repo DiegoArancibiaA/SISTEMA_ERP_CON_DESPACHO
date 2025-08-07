@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DispatchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -9,6 +11,8 @@
  get and post mehod for update and delete
 |
 */
+//use App\Http\Controllers\DispatchController;
+
 Route::group(['middleware'=> ['auth','check.permission']],function(){
 
 // Rutas de gráficos estadísticos
@@ -31,31 +35,14 @@ Route::get('product-distribution', 'DashboardController@getProductDistribution')
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Rutas de despachos
-Route::group(['middleware' => 'auth', 'prefix' => 'dispatches'], function() {
-    // Ruta para listar despachos
-    Route::get('/', 'DispatchController@index')->name('dispatches.index');
-    
-    // Ruta para mostrar formulario de creación
-    Route::get('/create', 'DispatchController@create')->name('dispatches.create');
-    
-    // Ruta para procesar el formulario (DEBE ir antes que las rutas con parámetros)
-    Route::post('/', 'DispatchController@store')->name('dispatches.store');
-    
-    // Rutas con parámetros
-    Route::group(['prefix' => '{dispatch}'], function() {
-        // Escaneo de productos
-        Route::get('/scan', 'DispatchController@scan')->name('dispatches.scan');
-        
-        // Acciones AJAX
-        Route::post('/scan-out', 'DispatchController@scanOut')->name('dispatches.scan.out');
-        Route::post('/scan-return', 'DispatchController@scanReturn')->name('dispatches.scan.return');
-        Route::post('/complete', 'DispatchController@complete')->name('dispatches.complete');
-        
-        // Reportes
-        Route::get('/report', 'DispatchController@report')->name('dispatches.report');
-        Route::get('/export', 'DispatchController@export')->name('dispatches.export');
-    });
-});
+Route::get('/dispatches/create', 'DispatchController@create')->name('dispatches.create');
+Route::post('/dispatches/out', 'DispatchController@storeOut')->name('dispatches.storeOut');
+Route::post('/dispatches/return', 'DispatchController@storeReturn')->name('dispatches.storeReturn');
+Route::get('/dispatches/missing', 'DispatchController@missingProducts')->name('dispatches.missing');
+
+Route::get('/dispatches/history', 'DispatchController@history')->name('dispatches.history');
+Route::get('/dispatches/{id}/details', 'DispatchController@details')->name('dispatches.details');
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

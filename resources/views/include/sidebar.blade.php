@@ -66,11 +66,7 @@
             </li>
 
             <!-- Gestión de Inventario -->
-<<<<<<< HEAD
             <li class="parent @if(request()->is('product*') || request()->is('category*') || request()->is('stock*') || request()->is('dispatches*')) active @endif">
-=======
-            <li class="parent @if(request()->is('product*') || request()->is('category*') || request()->is('stock*')) active @endif">
->>>>>>> 1a67c5ec1aaaa88a68d2dd52c53722fe21fe2465
                 <a href="javascript:void(0);" class="menu-toggle">
                     <i class="material-icons">inventory</i>
                     <span>Inventario</span>
@@ -95,34 +91,43 @@
                         </a>
                     </li>
                     <!-- Nuevo módulo de Despachos -->
-                    <!-- Módulo de Despachos - Versión corregida -->
+                    <!-- Módulo de Despachos -->
                     <li class="parent @if(request()->is('dispatches*')) active @endif">
                         <a href="javascript:void(0);" class="menu-toggle waves-effect waves-block">
                             <i class="material-icons">local_shipping</i>
                             <span>Despachos</span>
                         </a>
-                        <ul class="ml-menu" style="display: none;">
-                            <li class="@if(request()->is('dispatches')) active @endif">
-                                <a href="{{ route('dispatches.index') }}" class="waves-effect waves-block">
-                                    <i class="material-icons">list</i>
-                                    <span>Lista de Despachos</span>
-                                </a>
-                            </li>
+                        <ul class="ml-menu" style="display: @if(request()->is('dispatches*')) block @else none @endif;">
+                            
+                            {{-- Página para registrar salida y retorno --}}
                             <li class="@if(request()->is('dispatches/create')) active @endif">
                                 <a href="{{ route('dispatches.create') }}" class="waves-effect waves-block">
-                                    <i class="material-icons">add</i>
-                                    <span>Nuevo Despacho</span>
+                                    <i class="material-icons">add_circle</i>
+                                    <span>Registrar Salida / Retorno</span>
                                 </a>
                             </li>
-                            <li class="@if(request()->is('dispatches/*/report')) active @endif">
-                                <a href="{{ route('dispatches.report', ['dispatch' => 'latest']) }}" class="waves-effect waves-block">
-                                    <i class="material-icons">assignment</i>
-                                    <span>Reportes</span>
+
+                            {{-- Página para ver productos faltantes --}}
+                            <li class="@if(request()->is('dispatches/missing')) active @endif">
+                                <a href="{{ route('dispatches.missing') }}" class="waves-effect waves-block">
+                                    <i class="material-icons">error_outline</i>
+                                    <span>Productos Faltantes</span>
                                 </a>
                             </li>
+
+                            <li class="@if(request()->is('dispatches/history*')) active @endif">
+                                <a href="{{ route('dispatches.history') }}" class="waves-effect waves-block">
+                                    <i class="material-icons">history</i>
+                                    <span>Historial de Despachos</span>
+                                </a>
+                            </li>
+
+
                         </ul>
                     </li>
                     <!-- Fin módulo de Despachos -->
+
+
                     <li @if(request()->is('stats/low-stock')) class="active" @endif>
                         <a href="{{ url('stats/low-stock') }}">
                             <i class="material-icons">warning</i>
@@ -140,10 +145,7 @@
                 </ul>
             </li>
 
-<<<<<<< HEAD
            
-=======
->>>>>>> 1a67c5ec1aaaa88a68d2dd52c53722fe21fe2465
             <!-- Gestión de Compras -->
             <li @if(request()->is('supplier*')) class="active" @endif>
                 <a href="{{ url('supplier') }}">
