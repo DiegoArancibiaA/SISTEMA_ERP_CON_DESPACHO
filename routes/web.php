@@ -45,6 +45,7 @@ Route::get('/dispatches/{id}/details', 'DispatchController@details')->name('disp
 
 
 Route::get('/dispatches/missing/report', 'DispatchController@missingReport')->name('dispatches.missing.report');
+Route::get('/dispatches/{id}/report', 'DispatchController@detailsReport')->name('dispatches.details.report');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
