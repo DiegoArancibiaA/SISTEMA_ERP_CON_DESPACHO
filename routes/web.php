@@ -44,6 +44,8 @@ Route::get('/dispatches/history', 'DispatchController@history')->name('dispatche
 Route::get('/dispatches/{id}/details', 'DispatchController@details')->name('dispatches.details');
 
 
+Route::get('/dispatches/missing/report', 'DispatchController@missingReport')->name('dispatches.missing.report');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // dashboard 

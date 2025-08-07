@@ -5,9 +5,10 @@
     <div class="modern-header">
         <h2 class="modern-title">Productos Faltantes</h2>
         <div class="modern-actions">
-            <button class="modern-btn modern-btn-export">
+            <a href="{{ route('dispatches.missing.report') }}" class="modern-btn modern-btn-export" target="_blank">
                 <i class="fas fa-file-export"></i> Exportar
-            </button>
+            </a>
+
             <button class="modern-btn modern-btn-refresh">
                 <i class="fas fa-sync-alt"></i> Actualizar
             </button>

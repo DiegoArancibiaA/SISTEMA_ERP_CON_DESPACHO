@@ -124,6 +124,32 @@ class DispatchController extends Controller
     }
 
 
+    public function missingReport()
+    {
+        $missingProducts = DB::table('dispatch_products')
+            ->join('dispatches', 'dispatch_products.dispatch_id', '=', 'dispatches.id')
+            ->join('products', 'dispatch_products.product_id', '=', 'products.id')
+            ->join('users', 'dispatches.user_id', '=', 'users.id') // unión con tabla users
+            ->select(
+                'dispatches.id as dispatch_id',
+                'dispatches.dispatch_date',
+                'users.name as user_name', // nombre del usuario
+                'products.id as product_id',
+                'products.product_name',
+                'products.sku',
+                'dispatch_products.quantity_out',
+                'dispatch_products.quantity_returned',
+                DB::raw('(dispatch_products.quantity_out - dispatch_products.quantity_returned) as missing_quantity')
+            )
+            ->whereColumn('dispatch_products.quantity_returned', '<', 'dispatch_products.quantity_out')
+            ->orderBy('dispatches.dispatch_date', 'desc')
+            ->get();
+
+        return view('dispatches.missing_report', compact('missingProducts'));
+    }
+
+
+
 
 
 

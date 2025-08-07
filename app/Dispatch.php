@@ -12,4 +12,10 @@ class Dispatch extends Model
     {
         return $this->hasMany(\App\DispatchProduct::class);
     }
+    // app/Models/Dispatch.php
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
