@@ -14243,7 +14243,7 @@ window.Vue = __webpack_require__(168);
 Vue.component('example-component', __webpack_require__(187));
 
 var app = new Vue({
-  el: '#inventory'
+  el: '#AlphaERP'
 });
 
 /***/ }),

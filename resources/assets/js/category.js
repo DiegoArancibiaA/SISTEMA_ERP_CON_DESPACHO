@@ -6,5 +6,5 @@ Vue.component('view-category', require('./components/category/ViewCategory.vue')
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });

@@ -41229,7 +41229,7 @@ Vue.component('view-invoice', __webpack_require__(246));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

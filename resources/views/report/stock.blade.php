@@ -1,7 +1,7 @@
 @extends('include.master')
 
 
-@section('title','Inventory | Stock-Report')
+@section('title','AlphaERP | Stock-Report')
 
 
 @section('page-title','Stock Report')

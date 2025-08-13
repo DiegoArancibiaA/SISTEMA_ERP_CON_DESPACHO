@@ -4,5 +4,5 @@ Vue.component('view-invoice', require('./components/invoice/ViewInvoice.vue'));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });

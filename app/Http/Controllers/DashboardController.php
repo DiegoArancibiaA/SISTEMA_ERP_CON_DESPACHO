@@ -81,7 +81,7 @@ class DashboardController extends Controller
     }
 
     /*==================================== Tendencia de Inventario (Gráfico de Líneas) ==========================*/
-    public function getInventoryTrend()
+    public function getAlphaERPTrend()
     {
         $trend = Stock::select(
                 DB::raw('MONTH(created_at) as month'),

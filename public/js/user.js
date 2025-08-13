@@ -38494,7 +38494,7 @@ Vue.component('create-user', __webpack_require__(283));
 Vue.component('view-user', __webpack_require__(286));
 
 var app = new Vue({
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

@@ -1,6 +1,6 @@
 @extends('include.frame_graph')
 
-@section('title', 'Reporte de Stock Bajo')
+@section('title', 'AlphaERP')
 @section('content')
     {{-- REPORTE DE STOCK BAJO --}}
     <div class="container-graf">

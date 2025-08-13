@@ -38506,7 +38506,7 @@ Vue.component('view-customer', __webpack_require__(297));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

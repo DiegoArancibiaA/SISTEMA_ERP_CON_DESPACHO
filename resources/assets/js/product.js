@@ -6,5 +6,5 @@ Vue.component('view-product', require('./components/product/ViewProduct.vue'));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });

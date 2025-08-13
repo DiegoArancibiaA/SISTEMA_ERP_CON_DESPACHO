@@ -38204,7 +38204,7 @@ Vue.component('create-role', __webpack_require__(269));
 Vue.component('view-role', __webpack_require__(272));
 
 var app = new Vue({
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

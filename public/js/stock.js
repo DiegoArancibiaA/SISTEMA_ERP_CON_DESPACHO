@@ -38452,7 +38452,7 @@ Vue.component('create-stock', __webpack_require__(214));
 Vue.component('view-stock', __webpack_require__(217));
 
 var app = new Vue({
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

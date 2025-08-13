@@ -38404,7 +38404,7 @@ Vue.component('create-vendor', __webpack_require__(192));
 Vue.component('view-vendor', __webpack_require__(195));
 
 var app = new Vue({
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

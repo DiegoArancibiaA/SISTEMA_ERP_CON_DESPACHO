@@ -2,41 +2,41 @@
 
 namespace App\Observers;
 
-use App\Inventory; // Nota: usa App\Inventory en lugar de App\Models\Inventory
+use App\AlphaERP; // Nota: usa App\AlphaERP en lugar de App\Models\AlphaERP
 
-class InventoryObserver
+class AlphaERPObserver
 {
     // Métodos del observer aquí...
-    public function created(Inventory $inventory)
+    public function created(AlphaERP $AlphaERP)
     {
         // Lógica cuando se crea
     }
 
-    public function updated(Inventory $inventory)
+    public function updated(AlphaERP $AlphaERP)
     {
         // Lógica cuando se actualiza
     }
 
     /**
-     * Handle the Inventory "deleted" event.
+     * Handle the AlphaERP "deleted" event.
      */
-    public function deleted(Inventory $inventory): void
+    public function deleted(AlphaERP $AlphaERP): void
     {
         //
     }
 
     /**
-     * Handle the Inventory "restored" event.
+     * Handle the AlphaERP "restored" event.
      */
-    public function restored(Inventory $inventory): void
+    public function restored(AlphaERP $AlphaERP): void
     {
         //
     }
 
     /**
-     * Handle the Inventory "force deleted" event.
+     * Handle the AlphaERP "force deleted" event.
      */
-    public function forceDeleted(Inventory $inventory): void
+    public function forceDeleted(AlphaERP $AlphaERP): void
     {
         //
     }

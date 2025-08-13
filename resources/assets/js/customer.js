@@ -4,5 +4,5 @@ Vue.component('view-customer', require('./components/customer/ViewCustomer.vue')
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });

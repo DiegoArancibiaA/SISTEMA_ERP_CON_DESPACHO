@@ -1,6 +1,6 @@
 @extends('include.master')
 
-@section('title','Inventory | Categorías')
+@section('title','AlphaERP | Categorías')
 
 @section('page-title','Lista de categorías')
 

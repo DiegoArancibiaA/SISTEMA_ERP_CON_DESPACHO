@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>inventory-invoice:{{ $invoice->id }}</title>
+	<title>AlphaERP-invoice:{{ $invoice->id }}</title>
 	<link href="{{ url('plugins/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>

@@ -3,7 +3,7 @@
 
 <head>
 
-    <title>@yield('title','ERP-EDIM')</title>
+    <title>@yield('title','AlphaERP')</title>
 
     @include('include.header')
     <style>
@@ -48,7 +48,7 @@
 
 
         <section class="content">
-            <div id="inventory" class="container-fluid">
+            <div id="AlphaERP" class="container-fluid">
                 <div class="block-header">
                     <h2>@yield('page-title')</h2>
                 </div>

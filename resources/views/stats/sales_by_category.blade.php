@@ -1,5 +1,5 @@
 @extends('include.frame_graph')
-@section('title','Ventas por Categoría')
+@section('title', 'AlphaERP')
 @section('page-title','Estadísticas - Ventas por Categoría')
 
 @section('content')

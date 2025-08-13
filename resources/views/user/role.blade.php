@@ -1,7 +1,7 @@
 @extends('include.master')
 
 
-@section('title','Inventory | Gestión de roles')
+@section('title','AlphaERP | Gestión de roles')
 
 
 @section('page-title','Gestión de roles')

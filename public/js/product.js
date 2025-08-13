@@ -38415,7 +38415,7 @@ Vue.component('view-product', __webpack_require__(206));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),
@@ -38821,7 +38821,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("inventory")])
+      _c("i", { staticClass: "material-icons" }, [_vm._v("AlphaERP")])
     ])
   },
   function() {
@@ -39520,7 +39520,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", { staticClass: "material-icons" }, [_vm._v("inventory")])
+      _c("i", { staticClass: "material-icons" }, [_vm._v("AlphaERP")])
     ])
   },
   function() {

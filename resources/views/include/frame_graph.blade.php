@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@yield('title','Inventory')</title>
+    <title>@yield('title','AlphaERP')</title>
 
     @include('include.header')
     <style>
@@ -56,7 +56,7 @@
     <!-- Contenido centrado -->
     <!--<section class="content_frame">
         <div style="max-width: 2500px; height: 1000px; margin: 10px auto 2rem; width: 100%;">
-            <div id="inventory" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+            <div id="AlphaERP" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                 <div class="block-header" style="text-align: center;">
                     <h2>@yield('page-title')</h2>
                 </div>
@@ -69,7 +69,7 @@
         </div>
     </section>-->
     <section class="content_frame">
-            <div id="inventory" class="centered-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+            <div id="AlphaERP" class="centered-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
                 <div class="block-header">
                     <h2>@yield('page-title')</h2>
                 </div>

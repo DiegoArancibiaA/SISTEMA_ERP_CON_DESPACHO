@@ -15,7 +15,7 @@
 @extends('include.master')
 
 {{-- Define el título de la página que aparece en la pestaña del navegador --}}
-@section('title','Inventory | Dashboard')
+@section('title','AlphaERP  | Dashboard')
 
 {{-- Define el título principal de la sección --}}
 @section('page-title','Dashboard')

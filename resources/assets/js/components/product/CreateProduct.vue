@@ -33,7 +33,7 @@
                 <div class="col-md-12">
                   <div class="input-group">
                     <span class="input-group-addon">
-                      <i class="material-icons">inventory</i>
+                      <i class="material-icons">AlphaERP</i>
                     </span>
                     <div class="form-line">
                       <input type="text" class="form-control date" placeholder="Nombre" v-model="product.name" />

@@ -38440,7 +38440,7 @@ Vue.component('view-category', __webpack_require__(231));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

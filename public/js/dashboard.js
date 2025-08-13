@@ -38241,7 +38241,7 @@ Vue.component('info-box', __webpack_require__(305));
 
 var app = new Vue({
 
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),

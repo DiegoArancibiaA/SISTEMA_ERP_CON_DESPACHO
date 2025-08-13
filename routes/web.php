@@ -30,7 +30,7 @@ Route::get('/api/low-stock-products', 'DashboardController@getLowStockProducts')
 
 // Rutas API para gráficos
 Route::get('sales-by-category', 'DashboardController@getSalesByCategory')->name('dashboard.sales-by-category');
-Route::get('inventory-trend', 'DashboardController@getInventoryTrend')->name('dashboard.inventory-trend');
+Route::get('AlphaERP-trend', 'DashboardController@getAlphaERPTrend')->name('dashboard.AlphaERP-trend');
 Route::get('product-distribution', 'DashboardController@getProductDistribution')->name('dashboard.product-distribution');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

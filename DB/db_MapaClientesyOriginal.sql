@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para db_inventory
-CREATE DATABASE IF NOT EXISTS `db_inventory` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `db_inventory`;
+-- Volcando estructura de base de datos para db_AlphaERP
+CREATE DATABASE IF NOT EXISTS `db_AlphaERP` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish2_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `db_AlphaERP`;
 
--- Volcando estructura para tabla db_inventory.biye
+-- Volcando estructura para tabla db_AlphaERP.biye
 CREATE TABLE IF NOT EXISTS `biye` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE IF NOT EXISTS `biye` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.biye: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.biye: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla db_inventory.branches
+-- Volcando estructura para tabla db_AlphaERP.branches
 CREATE TABLE IF NOT EXISTS `branches` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `branch_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -39,9 +39,9 @@ CREATE TABLE IF NOT EXISTS `branches` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.branches: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.branches: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla db_inventory.categories
+-- Volcando estructura para tabla db_AlphaERP.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.categories: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.categories: ~0 rows (aproximadamente)
 REPLACE INTO `categories` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 	(34, 'Alimentos secos', 1, '2023-04-16 03:14:24', '2023-04-16 03:14:24'),
 	(35, 'Productos enlatados', 1, '2023-04-16 03:14:31', '2023-04-16 03:14:31'),
@@ -74,7 +74,7 @@ REPLACE INTO `categories` (`id`, `name`, `status`, `created_at`, `updated_at`) V
 	(52, 'Artículos para el hogar y jardín', 1, '2023-04-16 03:16:35', '2023-04-16 03:16:35'),
 	(53, 'Productos de conveniencia', 1, '2023-04-16 03:16:41', '2023-04-16 03:16:41');
 
--- Volcando estructura para tabla db_inventory.companies
+-- Volcando estructura para tabla db_AlphaERP.companies
 CREATE TABLE IF NOT EXISTS `companies` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -85,11 +85,11 @@ CREATE TABLE IF NOT EXISTS `companies` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.companies: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.companies: ~0 rows (aproximadamente)
 REPLACE INTO `companies` (`id`, `name`, `phone`, `address`, `created_at`, `updated_at`) VALUES
 	(1, 'StockInventarios', '9611702915', 'Calle 10 #123, Colonia San Pedro, Ciudad de México, Código Postal 01230.', NULL, '2023-04-17 05:35:09');
 
--- Volcando estructura para tabla db_inventory.customers
+-- Volcando estructura para tabla db_AlphaERP.customers
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `customer_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.customers: ~19 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.customers: ~19 rows (aproximadamente)
 REPLACE INTO `customers` (`id`, `customer_name`, `email`, `phone`, `address`, `latitude`, `longitude`, `status`, `created_at`, `updated_at`) VALUES
 	(37, 'Juan Pérez', 'juan.perez@example.com', '555-1234', 'Calle 1, Colonia Centro, Ciudad de México', 19.4368197, -99.1463904, 1, '2023-04-17 02:08:05', '2025-08-02 05:07:00'),
 	(38, 'María Rodríguez', 'maria.rodriguez@example.com', '555-5678', 'Calle 2, Colonia Condesa, Ciudad de México', 19.4162603, -99.1776382, 1, '2023-04-17 02:08:05', '2025-08-02 05:07:04'),
@@ -127,7 +127,7 @@ REPLACE INTO `customers` (`id`, `customer_name`, `email`, `phone`, `address`, `l
 	(55, 'Tatiana Alvarado', 'carmonabernaldiego@gmail.com', '932456789', 'Achao 5998, Antofagasta, Región de Antofagasta, Chile', -23.6184080, -70.3792908, 1, '2025-08-02 07:42:42', '2025-08-02 08:33:04'),
 	(56, 'Karime Guerra', 'diegho.hulk@gmail.com', '999685060', 'Juan Pablo II 634, Antofagasta, Región de Antofagasta, Chile', -23.5779362, -70.3874410, 1, '2025-08-02 08:35:37', '2025-08-02 08:36:02');
 
--- Volcando estructura para tabla db_inventory.menus
+-- Volcando estructura para tabla db_AlphaERP.menus
 CREATE TABLE IF NOT EXISTS `menus` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int NOT NULL DEFAULT '0',
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `menus` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.menus: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.menus: ~0 rows (aproximadamente)
 REPLACE INTO `menus` (`id`, `parent_id`, `name`, `icon`, `menu_url`, `status`, `created_at`, `updated_at`) VALUES
 	(1, 0, 'Clientes', 'contacts', 'customer.index', 0, '2020-07-29 13:17:51', '2020-07-29 13:17:56'),
 	(2, 0, 'Gestión de Productos', 'category', NULL, 0, '2020-07-29 13:17:53', '2020-07-29 13:17:54'),
@@ -158,7 +158,7 @@ REPLACE INTO `menus` (`id`, `parent_id`, `name`, `icon`, `menu_url`, `status`, `
 	(14, 6, 'Información de la empresa', NULL, 'company.index', 0, '2020-07-29 13:17:43', '2020-07-29 13:17:45'),
 	(15, 6, 'Cambiar la contraseña', NULL, 'password.index', 0, '2020-07-29 13:17:42', '2020-07-29 13:16:37');
 
--- Volcando estructura para tabla db_inventory.migrations
+-- Volcando estructura para tabla db_AlphaERP.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.migrations: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.migrations: ~1 rows (aproximadamente)
 REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
 	(2, '2014_10_12_100000_create_password_resets_table', 1),
@@ -185,7 +185,7 @@ REPLACE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(15, '2019_02_10_114735_create_menus_table', 6),
 	(16, '2019_02_14_130126_create_companies_table', 7);
 
--- Volcando estructura para tabla db_inventory.password_resets
+-- Volcando estructura para tabla db_AlphaERP.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -193,9 +193,9 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.password_resets: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.password_resets: ~0 rows (aproximadamente)
 
--- Volcando estructura para tabla db_inventory.payments
+-- Volcando estructura para tabla db_AlphaERP.payments
 CREATE TABLE IF NOT EXISTS `payments` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `sell_id` int NOT NULL,
@@ -210,12 +210,12 @@ CREATE TABLE IF NOT EXISTS `payments` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.payments: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.payments: ~0 rows (aproximadamente)
 REPLACE INTO `payments` (`id`, `sell_id`, `customer_id`, `user_id`, `date`, `paid_in`, `bank_information`, `amount`, `created_at`, `updated_at`) VALUES
 	(56, 51, 40, 12, '2023-04-19', 'efectivo', NULL, 412, '2023-04-17 05:34:02', '2023-04-17 05:34:02'),
 	(57, 51, 40, 12, '2023-04-20', 'efectivo', NULL, 0.5, '2023-04-17 05:34:22', '2023-04-17 05:34:22');
 
--- Volcando estructura para tabla db_inventory.permissions
+-- Volcando estructura para tabla db_AlphaERP.permissions
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role_id` int NOT NULL,
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=744 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.permissions: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.permissions: ~0 rows (aproximadamente)
 REPLACE INTO `permissions` (`id`, `role_id`, `menu_id`, `created_at`, `updated_at`) VALUES
 	(124, 5, 1, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
 	(125, 5, 2, '2019-02-23 00:54:16', '2019-02-23 00:54:16'),
@@ -273,7 +273,7 @@ REPLACE INTO `permissions` (`id`, `role_id`, `menu_id`, `created_at`, `updated_a
 	(742, 2, 15, '2021-07-05 20:00:38', '2021-07-05 20:00:38'),
 	(743, 2, 6, '2021-07-05 20:00:38', '2021-07-05 20:00:38');
 
--- Volcando estructura para tabla db_inventory.products
+-- Volcando estructura para tabla db_AlphaERP.products
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `category_id` int NOT NULL,
@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.products: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.products: ~0 rows (aproximadamente)
 REPLACE INTO `products` (`id`, `category_id`, `product_name`, `details`, `status`, `created_at`, `updated_at`) VALUES
 	(30, 34, 'Arroz blanco de grano largo', 'Este arroz es conocido por su textura suave y delicada, y es ideal para preparar una gran variedad de platos, desde arroz con frijoles hasta sushi. El arroz blanco de grano largo es una excelente fuente de carbohidratos y se puede cocinar fácilmente en una olla de arroz o en una cacerola.', 1, '2023-04-16 03:18:28', '2023-04-16 05:54:34'),
 	(31, 34, 'Frijoles negros envasados al vacío', 'Estos frijoles son una excelente fuente de proteínas y fibra, y son un ingrediente popular en muchos platos tradicionales de la cocina latinoamericana, como los frijoles refritos y el chili con carne. Los frijoles negros envasados al vacío son fáciles de almacenar y se pueden preparar en pocos minutos.', 1, '2023-04-16 03:18:43', '2023-04-16 05:54:52'),
@@ -473,7 +473,7 @@ REPLACE INTO `products` (`id`, `category_id`, `product_name`, `details`, `status
 	(233, 46, 'Impresora HP Envy 6055', 'Impresora HP Envy 6055 con capacidad de imprimir en color, escanear y copiar, y conexión inalámbrica', 1, '2023-05-02 15:30:00', '2023-05-02 15:30:00'),
 	(234, 46, 'Audífonos inalámbricos Apple AirPods Pro', 'Audífonos inalámbricos Apple AirPods Pro con cancelación de ruido activa, sonido de alta calidad y resistencia al agua y al sudor', 1, '2023-05-02 15:30:00', '2023-05-02 15:30:00');
 
--- Volcando estructura para tabla db_inventory.roles
+-- Volcando estructura para tabla db_AlphaERP.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `role_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -482,14 +482,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.roles: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.roles: ~0 rows (aproximadamente)
 REPLACE INTO `roles` (`id`, `role_name`, `created_at`, `updated_at`) VALUES
 	(2, 'Superadministrador', '2019-02-12 03:59:54', '2023-04-17 04:53:28'),
 	(3, 'Gerente', '2019-02-13 00:07:41', '2023-04-17 04:35:56'),
 	(4, 'Vendedor', '2019-02-13 01:34:11', '2023-04-17 04:36:08'),
 	(5, 'Controlador', '2019-02-13 05:53:15', '2023-04-17 04:41:36');
 
--- Volcando estructura para tabla db_inventory.sells
+-- Volcando estructura para tabla db_AlphaERP.sells
 CREATE TABLE IF NOT EXISTS `sells` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
@@ -506,11 +506,11 @@ CREATE TABLE IF NOT EXISTS `sells` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.sells: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.sells: ~0 rows (aproximadamente)
 REPLACE INTO `sells` (`id`, `user_id`, `customer_id`, `branch_id`, `total_amount`, `paid_amount`, `sell_date`, `discount_amount`, `payment_method`, `payment_status`, `created_at`, `updated_at`) VALUES
 	(51, 12, 40, 1, 412.5, 412.5, '2023-04-17', 0, 2, 1, '2023-04-17 05:33:31', '2023-04-17 05:34:22');
 
--- Volcando estructura para tabla db_inventory.sell_details
+-- Volcando estructura para tabla db_AlphaERP.sell_details
 CREATE TABLE IF NOT EXISTS `sell_details` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `stock_id` int NOT NULL,
@@ -535,11 +535,11 @@ CREATE TABLE IF NOT EXISTS `sell_details` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.sell_details: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.sell_details: ~0 rows (aproximadamente)
 REPLACE INTO `sell_details` (`id`, `stock_id`, `sell_id`, `product_id`, `category_id`, `vendor_id`, `user_id`, `chalan_no`, `selling_date`, `customer_id`, `sold_quantity`, `buy_price`, `sold_price`, `total_buy_price`, `total_sold_price`, `discount`, `discount_type`, `discount_amount`, `created_at`, `updated_at`) VALUES
 	(70, 55, 51, 30, 34, 81, 12, '2023-04-16', '2023-04-17', '40', 33, 9.8, 12.5, 323.40000000000003, 412.5, 0, 1, 0, '2023-04-17 05:33:31', '2023-04-17 05:33:31');
 
--- Volcando estructura para tabla db_inventory.stocks
+-- Volcando estructura para tabla db_AlphaERP.stocks
 CREATE TABLE IF NOT EXISTS `stocks` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `product_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -560,12 +560,12 @@ CREATE TABLE IF NOT EXISTS `stocks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.stocks: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.stocks: ~0 rows (aproximadamente)
 REPLACE INTO `stocks` (`id`, `product_code`, `product_id`, `category_id`, `vendor_id`, `user_id`, `chalan_no`, `buying_price`, `selling_price`, `discount`, `stock_quantity`, `current_quantity`, `note`, `status`, `created_at`, `updated_at`) VALUES
 	(55, '1681681567', 30, 34, 81, 12, '2023-04-16', 9.8, 12.5, 0, 100, 67, NULL, 1, '2023-04-16 22:46:07', '2023-04-17 05:33:31'),
 	(56, '1681705778', 67, 37, 81, 12, '2023-04-16', 189.99, 249.99, 0, 48, 48, NULL, 1, '2023-04-17 05:29:38', '2023-04-17 05:29:38');
 
--- Volcando estructura para tabla db_inventory.users
+-- Volcando estructura para tabla db_AlphaERP.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -580,11 +580,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.users: ~0 rows (aproximadamente)
 REPLACE INTO `users` (`id`, `name`, `email`, `password`, `branch_id`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(12, 'Diego Carmona Bernal', 'carmonabernaldiego@gmail.com', '$2y$10$W/nqTuN0X.JaGtGBkpw01OTSL0I3aShYL9QusP8Q5kIZ2AviqQHKC', 1, 2, 'RXwbEFrJ1dxS0Z3zaf154NCqYBvA20mHSB4J3l0Z3JStQoEJBuPjiC8MowOf', '2020-07-31 17:27:25', '2023-04-17 05:20:18');
 
--- Volcando estructura para tabla db_inventory.vendors
+-- Volcando estructura para tabla db_AlphaERP.vendors
 CREATE TABLE IF NOT EXISTS `vendors` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -596,7 +596,7 @@ CREATE TABLE IF NOT EXISTS `vendors` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla db_inventory.vendors: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla db_AlphaERP.vendors: ~0 rows (aproximadamente)
 REPLACE INTO `vendors` (`id`, `name`, `phone`, `email`, `address`, `created_at`, `updated_at`) VALUES
 	(76, 'La Michoacana', '55-1234-5678', 'contacto@lamichoacana.com.mx', 'Av. Insurgentes Sur 1647, Col. San José Insurgentes, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),
 	(77, 'El Paraiso del Helado', '55-8765-4321', 'info@elparaisodelhelado.com.mx', 'Calle Gral. Emiliano Zapata 54, Col. San Francisco Chilpan, CDMX', '2023-04-16 21:44:30', '2023-04-16 21:44:30'),

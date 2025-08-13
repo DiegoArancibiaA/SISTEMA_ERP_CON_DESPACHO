@@ -40641,7 +40641,7 @@ __webpack_require__(2);
 Vue.component('report-form', __webpack_require__(264));
 
 var app = new Vue({
-    el: '#inventory'
+    el: '#AlphaERP'
 });
 
 /***/ }),
